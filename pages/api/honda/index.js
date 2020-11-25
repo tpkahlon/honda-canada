@@ -1,7 +1,7 @@
 import {JSDOM} from 'jsdom'
 
 export default async function handler(req, res) {
-  const r = await fetch(`https://cuv.honda.ca/en/inventory/search?make=Honda&stock_type=Used&sort_by=price&sort_order=ASC&page_length=1000`);
+  const r = await fetch(`https://cuv.honda.ca/en/inventory/search?make=Honda&stock_type=Used&sort_by=price&sort_order=ASC&page_length=500`);
   const t = await r.text();
   const dom = new JSDOM(t);
   const list = dom.window.document;
