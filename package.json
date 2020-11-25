@@ -12,5 +12,8 @@
     "react-dom": "^16.8.6",
     "swr": "0.1.18"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "jsdom": "^16.4.0"
+  }
 }

@@ -1,19 +1,15 @@
-import useSWR from 'swr'
-import Person from '../components/Person'
+import useSWR from "swr";
+import HondaCanada from "../components/HondaCanada";
 
-const fetcher = (url) => fetch(url).then((res) => res.json())
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Index() {
-  const { data, error } = useSWR('/api/people', fetcher)
+  const { data, error } = useSWR("/api/honda", fetcher);
 
-  if (error) return <div>Failed to load</div>
-  if (!data) return <div>Loading...</div>
+  let listing = data ? data : null;
 
-  return (
-    <ul>
-      {data.map((p, i) => (
-        <Person key={i} person={p} />
-      ))}
-    </ul>
-  )
+  if (error) return <div>Failed to load...</div>;
+  if (!data) return <div>Loading...</div>;
+
+  return <HondaCanada listing={listing} />;
 }
