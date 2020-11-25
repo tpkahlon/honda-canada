@@ -95,7 +95,7 @@ const HondaCanada = ({ listing }) => {
         </li>
         <li>
           <strong>Total vehiles came in strongis API call: </strong>
-          <span>{vehicles.lengstrong}</span>
+          <span>{vehicles.length}</span>
         </li>
         <li>
           <strong>Current page of strongis API call: </strong>
