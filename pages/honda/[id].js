@@ -20,6 +20,7 @@ export default function Honda() {
   );
 
   let listing = data ? data : null;
+  console.log(listing)
 
   if (error) return <div>{error.message}</div>;
   if (!data) return <div>Loading...</div>;
