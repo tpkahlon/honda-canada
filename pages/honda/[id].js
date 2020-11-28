@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import HondaCanada from "../../components/HondaCanada";
+import App from "../../components/App";
 
 const fetcher = async (url) => {
   const res = await fetch(url);
@@ -20,10 +20,9 @@ export default function Honda() {
   );
 
   let listing = data ? data : null;
-  console.log(listing)
 
   if (error) return <div>{error.message}</div>;
   if (!data) return <div>Loading...</div>;
 
-  return <HondaCanada listing={listing} />;
+  return <App listing={listing} />;
 }

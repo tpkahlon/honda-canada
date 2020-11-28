@@ -1,0 +1,86 @@
+@import "./vars";
+@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.css");
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  color: $white;
+  background: $black;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  margin: 1rem;
+  font-size: 1rem;
+}
+
+a {
+  color: $white;
+  text-decoration: none;
+}
+
+nav {
+  margin: 0 0 1rem;
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background: lighten($black, 5%);
+  a {
+    padding-left: 1.5rem;
+    &:first-child {
+      padding: 0;
+    }
+    &:last-child {
+      padding-right: 1.5rem;
+    }
+    &.active {
+      color: darken($white, 50%);
+      font-weight: bolder;
+    }
+    &:hover {
+      color: darken($white, 50%);
+    }
+  }
+}
+
+ul {
+  display: table;
+  margin: -1rem;
+  padding: 0;
+  border-spacing: 1rem;
+  border-collapse: separate;
+  li {
+    display: table-row;
+    span,
+    strong,
+    a {
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      display: table-cell;
+      vertical-align: middle;
+    }
+    span {
+      font-size: 2rem;
+      background: lighten($black, 10%);
+    }
+    strong {
+      text-align: center;
+      vertical-align: top;
+      text-transform: uppercase;
+      background: lighten($black, 20%);
+    }
+    a {
+      text-align: center;
+      vertical-align: top;
+      text-transform: uppercase;
+      color: $black;
+      background: $white;
+    }
+  }
+}

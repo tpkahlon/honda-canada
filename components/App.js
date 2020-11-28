@@ -1,16 +1,16 @@
 import React from "react";
-import Link from "next/link";
+import Navigation from "../components/Navigation";
 
-const HondaCanada = ({ listing }) => {
-  console.log(listing);
+const App = ({ listing }) => {
+  console.log("x", listing);
   const { total, took, vehicles, currentPage, pages, filters } = listing.data;
 
   let filterHTML = ``;
   for (const property in filters) {
-    filterHTML += `<strong>${property}: </strong>`;
+    filterHTML += `<strong>${property}</strong>`;
     let childFilterHTML = `<ul>`;
     for (const childProperty in filters[property]) {
-      childFilterHTML += `<li><strong>${childProperty}: </strong>`;
+      childFilterHTML += `<li><strong>${childProperty}</strong>`;
       childFilterHTML += `<span>${filters[property][childProperty]}</span></li>`;
     }
     childFilterHTML += `</ul>`;
@@ -23,36 +23,36 @@ const HondaCanada = ({ listing }) => {
       {vehicles.map((i) => {
         return (
           <li key={i.id}>
-            <ul style={{ borderTop: "1px solid black" }}>
+            <ul>
               <li>
-                <strong>ID</strong>: <span>{i.id}</span>
+                <strong>ID</strong> <span>{i.id}</span>
               </li>
               <li>
-                <strong>VIN</strong>: <span>{i.vin}</span>
+                <strong>VIN</strong> <span>{i.vin}</span>
               </li>
               <li>
-                <strong>Price</strong>:{" "}
+                <strong>Price</strong>
                 <span style={{ fontSize: "2rem" }}>
                   ${i.pricingData.regular}
                 </span>
               </li>
               <li>
-                <strong>Model</strong>: <span>{i.model}</span>
+                <strong>Model</strong> <span>{i.model}</span>
               </li>
               <li>
-                <strong>Mileage</strong>: <span>{i.odometer}</span>
+                <strong>Mileage</strong> <span>{i.odometer}</span>
               </li>
               <li>
-                <strong>Year</strong>: <span>{i.year}</span>
+                <strong>Year</strong> <span>{i.year}</span>
               </li>
               <li>
-                <strong>Type</strong>: <span>{i.driveType}</span>
+                <strong>Type</strong> <span>{i.driveType}</span>
               </li>
               <li>
-                <strong>Color</strong>: <span>{i.color_exterior}</span>
+                <strong>Color</strong> <span>{i.color_exterior}</span>
               </li>
               <li>
-                <strong>Color (Interior)</strong>:{" "}
+                <strong>Color (Interior)</strong>{" "}
                 <span>
                   {i.color.interior
                     ? i.color.interior.generic
@@ -60,13 +60,13 @@ const HondaCanada = ({ listing }) => {
                 </span>
               </li>
               <li>
-                <a
-                  href={i.dealer.websiteUrl}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <strong>View Dealer Site</strong>
-                </a>
+                  <a
+                    href={i.dealer.websiteUrl}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    View
+                  </a>
               </li>
             </ul>
           </li>
@@ -75,44 +75,39 @@ const HondaCanada = ({ listing }) => {
     </ul>
   );
 
-  let navigation = [...new Array(pages)].map((i, index) => (
-    <Link href="/honda/[id]" as={`/honda/${++index}`} key={index}>
-      <a>Page {index++}</a>
-    </Link>
-  ));
   return (
     <>
       <h1>Honda Canada</h1>
-      {navigation}
+      <Navigation pages={pages} />
       <ul>
         <li>
-          <strong>Total vehicles in Canada: </strong>
+          <strong>Total vehicles in Canada</strong>
           <span>{total}</span>
         </li>
         <li>
-          <strong>Total vehicles purchased today in Canada: </strong>
+          <strong>Total vehicles purchased today</strong>
           <span>{took}</span>
         </li>
         <li>
-          <strong>Total vehiles came in strongis API call: </strong>
+          <strong>Total vehicles listed on this page</strong>
           <span>{vehicles.length}</span>
         </li>
         <li>
-          <strong>Current page of strongis API call: </strong>
+          <strong>Current page</strong>
           <span>{currentPage}</span>
         </li>
         <li>
-          <strong>Total pages available in dataset: </strong>
+          <strong>Total pages</strong>
           <span>{pages}</span>
         </li>
-        <li dangerouslySetInnerHTML={{ __html: filterHTML }}></li>
         <li>
-          <strong>vehicles:</strong>
+          <strong>vehicles</strong>
           {vehicleHTML}
         </li>
+        <li dangerouslySetInnerHTML={{ __html: filterHTML }}></li>
       </ul>
     </>
   );
 };
 
-export default HondaCanada;
+export default App;

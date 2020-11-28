@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import HondaCanada from "../components/HondaCanada";
+import App from "../components/App";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -11,5 +11,5 @@ export default function Index() {
   if (error) return <div>Failed to load...</div>;
   if (!data) return <div>Loading...</div>;
 
-  return <HondaCanada listing={listing} />;
+  return <App listing={listing} />;
 }

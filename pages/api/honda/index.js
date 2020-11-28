@@ -1,19 +1,12 @@
-import {JSDOM} from 'jsdom'
+import parser from "../../../common/parser";
 
-export default async function handler(req, res) {
-  const r = await fetch(`https://cuv.honda.ca/en/inventory/search?make=Honda&stock_type=Used&sort_by=price&sort_order=ASC&page_length=200`);
-  const t = await r.text();
-  const dom = new JSDOM(t);
-  const list = dom.window.document;
-  const allScripts = list.querySelectorAll('script');
-  const allScriptsArray = [...allScripts];
-  let listing = null;
-  allScriptsArray.forEach(i => {
-    if(i.text.includes('window.strathcomSearchData = {')) {
-      listing = i.text.substring(46);
-      listing = listing.substring(0, listing.length - 12);
-      listing = JSON.parse(listing);
-    }
-  });
-  res.status(200).send(listing);
+export default async function (req, res) {
+  try {
+    const url = `https://cuv.honda.ca/en/inventory/search?make=Honda&stock_type=Used&sort_by=price&sort_order=ASC&page_length=50`;
+    const r = await fetch(url);
+    const t = await r.text();
+    res.status(200).send(parser(t));
+  } catch (err) {
+    res.status(400).send(err);
+  }
 }

@@ -1,25 +1,19 @@
-import {JSDOM} from 'jsdom'
+import parser from "../../../common/parser";
 
-export default async function hondaHandler({ query: { id } }, res) {
-    const r = await fetch(`https://cuv.honda.ca/en/inventory/search?make=Honda&stock_type=Used&sort_by=price&sort_order=ASC&page_length=200&page=${id}`);
+export default async function ({ query: { id } }, res) {
+  try {
+    const url = `https://cuv.honda.ca/en/inventory/search?make=Honda&stock_type=Used&sort_by=price&sort_order=ASC&page_length=50&page=${id}`;
+    const r = await fetch(url);
     const t = await r.text();
-    const dom = new JSDOM(t);
-    const list = dom.window.document;
-    const allScripts = list.querySelectorAll('script');
-    const allScriptsArray = [...allScripts];
-    let listing = null;
-    allScriptsArray.forEach(i => {
-        if(i.text.includes('window.strathcomSearchData = {')) {
-            listing = i.text.substring(46);
-            listing = listing.substring(0, listing.length - 12);
-            listing = JSON.parse(listing);
-        }
-    });
+    const parsedListing = parser(t);
 
-  // User with id exists
-  if (listing !== null) {
-    res.status(200).send(listing)
-  } else {
-    res.status(404).send({ message: `Page with id: ${id} not found.` })
+    // Page with id exists
+    if (parsedListing !== null) {
+      res.status(200).send(parsedListing);
+    } else {
+      res.status(404).send({ message: `Page with id: ${id} not found.` });
+    }
+  } catch(err) {
+    res.status(400).send(err);
   }
 }
