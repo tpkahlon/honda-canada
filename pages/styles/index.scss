@@ -89,6 +89,26 @@ ul {
           grid-template-columns: minmax(0, 1fr);
         }
       }
+      > strong {
+        &:hover {
+          cursor: pointer;
+        }
+        &::before {
+          position: absolute;
+          right: 1rem;
+          content: "-";
+        }
+      }
+      &.active {
+        strong {
+          &::before {
+            content: "+";
+          }
+          & + ul {
+            display: none;
+          }
+        }
+      }
     }
     span,
     strong,
@@ -101,6 +121,7 @@ ul {
       background: lighten($black, 10%);
     }
     strong {
+      position: relative;
       align-self: flex-start;
       text-transform: uppercase;
       background: lighten($black, 20%);
