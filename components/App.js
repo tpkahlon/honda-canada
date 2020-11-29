@@ -78,7 +78,7 @@ const App = ({ listing }) => {
   return (
     <>
       <h1>Honda Canada</h1>
-      <Navigation pages={pages} />
+      <Navigation pages={pages} currentPage={currentPage} />
       <ul>
         <li>
           <strong>Total vehicles in Canada</strong>
