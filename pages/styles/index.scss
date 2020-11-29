@@ -80,9 +80,11 @@ ul {
   li {
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     &.row {
       flex-direction: column;
+      @media (min-width: 48rem) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
       .child {
         &--view,
         > li {
@@ -121,6 +123,7 @@ ul {
       background: lighten($black, 10%);
     }
     strong {
+      word-break: break-all;
       position: relative;
       align-self: flex-start;
       text-transform: uppercase;
