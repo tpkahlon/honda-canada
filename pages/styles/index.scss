@@ -74,17 +74,22 @@ ul {
   padding: 0;
   list-style-type: none;
   display: flex;
-  gap: 1rem;
+  // gap: 1rem;
   flex-direction: column;
   justify-content: space-between;
   li {
     display: grid;
-    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-gap: 1rem;
+    margin: 0 0 1rem;
+    &:last-child {
+      margin: 0;
+    }
     &.row {
-      flex-direction: column;
-      @media (min-width: 48rem) {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      @media (max-width: 48rem) {
+        grid-template-columns: minmax(0, 1fr);
       }
+      flex-direction: column;
       .child {
         &--view,
         > li {
@@ -119,11 +124,11 @@ ul {
       padding: 1.5rem;
     }
     span {
-      word-break: break-all;
+      word-break: break-word;
       background: lighten($black, 10%);
     }
     strong {
-      word-break: break-all;
+      word-break: break-word;
       position: relative;
       align-self: flex-start;
       text-transform: uppercase;
