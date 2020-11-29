@@ -19,7 +19,7 @@ const App = ({ listing }) => {
 
   let vehicleHTML = null;
   vehicleHTML = (
-    <ul>
+    <ul className="child">
       {vehicles.map((i) => {
         return (
           <li key={i.id}>
@@ -32,7 +32,7 @@ const App = ({ listing }) => {
               </li>
               <li>
                 <strong>Price</strong>
-                <span style={{ fontSize: "2rem" }}>
+                <span>
                   ${i.pricingData.regular}
                 </span>
               </li>
@@ -59,14 +59,14 @@ const App = ({ listing }) => {
                     : "Not mentioned"}
                 </span>
               </li>
-              <li>
-                  <a
-                    href={i.dealer.websiteUrl}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    View
-                  </a>
+              <li className="child--view">
+                <a
+                  href={i.dealer.websiteUrl}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  View
+                </a>
               </li>
             </ul>
           </li>
@@ -100,11 +100,14 @@ const App = ({ listing }) => {
           <strong>Total pages</strong>
           <span>{pages}</span>
         </li>
-        <li>
+        <li className="row">
           <strong>vehicles</strong>
           {vehicleHTML}
         </li>
-        <li dangerouslySetInnerHTML={{ __html: filterHTML }}></li>
+        <li
+          className="row"
+          dangerouslySetInnerHTML={{ __html: filterHTML }}
+        ></li>
       </ul>
     </>
   );

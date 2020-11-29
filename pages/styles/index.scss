@@ -27,21 +27,40 @@ a {
 nav {
   margin: 0 0 1rem;
   display: flex;
-  flex-wrap: nowrap;
+  gap: 2.5rem;
   padding: 1.5rem;
   border-radius: 0.5rem;
   background: lighten($black, 5%);
+  overflow-x: auto;
   a {
-    padding-left: 1.5rem;
-    &:first-child {
-      padding: 0;
-    }
     &:last-child {
       padding-right: 1.5rem;
     }
     &.active {
       color: darken($white, 50%);
       font-weight: bolder;
+      position: relative;
+      z-index: 10;
+      &::before {
+        position: absolute;
+        content: "";
+        width: 0.5rem;
+        height: 0.5rem;
+        background: darken($white, 50%);
+        top: -1.5rem;
+        left: 50%;
+        margin-left: -0.25rem;
+      }
+      &::after {
+        position: absolute;
+        content: "";
+        width: 0.5rem;
+        height: 0.5rem;
+        background: darken($white, 50%);
+        bottom: -1.5rem;
+        left: 50%;
+        margin-left: -0.25rem;
+      }
     }
     &:hover {
       color: darken($white, 50%);
@@ -50,34 +69,44 @@ nav {
 }
 
 ul {
-  display: table;
-  margin: -1rem;
+  width: 100%;
+  margin: 0;
   padding: 0;
-  border-spacing: 1rem;
-  border-collapse: separate;
+  list-style-type: none;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  justify-content: space-between;
   li {
-    display: table-row;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    &.row {
+      flex-direction: column;
+      .child {
+        &--view,
+        > li {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+    }
     span,
     strong,
     a {
       border-radius: 0.5rem;
       padding: 1.5rem;
-      display: table-cell;
-      vertical-align: middle;
     }
     span {
-      font-size: 2rem;
+      word-break: break-all;
       background: lighten($black, 10%);
     }
     strong {
-      text-align: center;
-      vertical-align: top;
+      align-self: flex-start;
       text-transform: uppercase;
       background: lighten($black, 20%);
     }
     a {
       text-align: center;
-      vertical-align: top;
       text-transform: uppercase;
       color: $black;
       background: $white;
